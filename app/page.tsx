@@ -1,7 +1,11 @@
+import { Content } from "@/components/content/content";
+import { Header } from "@/components/header/header";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      ola
+    <main className="h-screen container mx-auto flex flex-col w-screen gap-16">
+      <Header />
+      <Content />
     </main>
   );
 }
