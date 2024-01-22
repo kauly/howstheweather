@@ -1,6 +1,6 @@
 "use client";
 
-import { CityContext, type CityData } from "@/lib/app.types";
+import { CityContext, type WeatherFinalData } from "@/lib/app.types";
 import { getCityData } from "@/lib/fetchers";
 import { PropsWithChildren, createContext, useCallback, useState } from "react";
 import toast from "react-hot-toast";
@@ -12,7 +12,7 @@ const CityContext = createContext({
 
 function CityProvider({ children }: PropsWithChildren) {
   const [loading, setLoading] = useState(false);
-  const [cityData, setCityData] = useState<CityData>();
+  const [cityData, setCityData] = useState<WeatherFinalData>();
 
   const handleCityData = useCallback(async (city: string) => {
     try {

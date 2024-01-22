@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
 
-import { CityData } from "@/lib/app.types";
+import { WeatherFinalData } from "@/lib/app.types";
 
 const today = dayjs().format("MMM D YYYY");
 
 type WeatherCardProps = {
-  data: CityData["current"];
+  data: WeatherFinalData["currentData"];
 };
 
 function WeatherCard({ data }: WeatherCardProps) {
@@ -16,7 +16,8 @@ function WeatherCard({ data }: WeatherCardProps) {
         <div className="flex items-center justify-center">{today}</div>
       </div>
       <div className="flex flex-col flex-1 items-center justify-center">
-        <h1 className="font-bold text-6xl text-orange-400">{`${data.temperature} °C`}</h1>
+        <h1 className="font-bold text-6xl text-orange-400">{`${data.temperatureImperial} °F`}</h1>
+        <h2>{data.description}</h2>
       </div>
       <div className="flex gap-2">
         <div className="flex flex-col items-center">

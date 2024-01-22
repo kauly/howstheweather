@@ -10,8 +10,12 @@ export const HELPER_TEXTS = {
   noText: "Please, type a city name or description",
 };
 
-function SearchBar() {
-  const [searchText, setSearchText] = useState("");
+type SearchBarProps = {
+  cityName?: string;
+};
+
+function SearchBar({ cityName = "" }: SearchBarProps) {
+  const [searchText, setSearchText] = useState(cityName);
   const [helperText, setHelperText] = useState(" ");
   const { handleCityData, loading } = useCityData();
 

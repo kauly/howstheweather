@@ -2,9 +2,9 @@
 
 import { WeatherCard } from "@/components/weather-card/weather-card";
 import { useCityData } from "@/hooks/user-city-data";
-import { ForecastCard } from "../forecast-card/forecast-card";
 import clsx from "clsx";
-import { ForecastItem } from "../forecast-card/forecast-item";
+
+import { ForecastCard } from "@/components/forecast-card/forecast-card";
 
 function Content() {
   const { data, loading } = useCityData();
@@ -15,8 +15,8 @@ function Content() {
         loading && "animate-pulse"
       )}
     >
-      {data && <WeatherCard data={data?.current} />}
-      {data && <ForecastCard data={data?.forecast} />}
+      {data && <WeatherCard data={data?.currentData} />}
+      {data && <ForecastCard data={data?.forecastData} />}
     </article>
   );
 }

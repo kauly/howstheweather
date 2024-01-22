@@ -1,32 +1,21 @@
 "use client";
 
 import * as Plot from "@observablehq/plot";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { feature } from "topojson-client";
 
 import world from "./world.json";
-import { useCityData } from "@/hooks/user-city-data";
 
 const geometries = feature(world, world.objects.countries);
 const initialCoords: [number, number] = [14.235, 51.9253];
 
 function Globe() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { data, loading } = useCityData();
-  console.log("🚀 ~ Globe ~ data:", data);
-
-  const coords: [number, number] = useMemo(
-    () => [
-      data?.current?.longitude || initialCoords[0],
-      data?.current?.latitude || initialCoords[0],
-    ],
-    [data]
-  );
 
   useEffect(() => {
     if (!containerRef.current) return;
     const plot = Plot.plot({
-      projection: { type: "orthographic", rotate: coords },
+      projection: { type: "orthographic", rotate: initialCoords },
       r: { transform: (d) => Math.pow(10, d) },
       height: 400,
       width: 300,
@@ -46,7 +35,7 @@ function Globe() {
     });
     containerRef.current.append(plot);
     return () => plot.remove();
-  }, [coords]);
+  }, []);
 
   return <div ref={containerRef} />;
 }

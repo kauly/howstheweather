@@ -1,11 +1,40 @@
-import { z } from "zod";
+import {
+  CurrentWeather,
+  DailyForecast,
+  Headline,
+  LocationKey,
+} from "./accuweather.types";
 
-import { cityDataSchema, forecastItemSchema } from "./schemas";
+export type ForecastItem = {
+  date: string;
+  minimum: number;
+  maximum: number;
+  description: string;
+};
+export type WeatherFinalData = {
+  currentData: {
+    date: string;
+    temperatureMetric: number;
+    temperatureImperial: number;
+    windSpeed: number;
+    description: string;
+    humidity: number;
+    cityName: string;
+  };
+  forecastData: {
+    headline: string;
+    forecasts: ForecastItem[];
+  };
+};
 
-export type CityData = z.infer<typeof cityDataSchema>;
-export type ForecastItem = z.infer<typeof forecastItemSchema>;
 export type CityContext = {
   loading: boolean;
-  data?: CityData;
+  data?: WeatherFinalData;
   handleCityData: (city: string) => Promise<void>;
 };
+export interface FiveDaysForecastResponse {
+  Headline: Headline;
+  DailyForecasts: DailyForecast[];
+}
+export type LocationKeyResponse = LocationKey[];
+export type CurrentWeatherResponse = CurrentWeather[];
