@@ -1,10 +1,11 @@
 "use client";
 
-import { ChangeEvent, FormEvent, FormEventHandler, useState } from "react";
-import { Button } from "../button/button";
+import { ChangeEvent, FormEvent, useState } from "react";
+
+import { Button } from "@/components/button/button";
 import { useCityData } from "@/hooks/user-city-data";
 
-const HELPER_TEXTS = {
+export const HELPER_TEXTS = {
   loading: "This could take sometime...",
   noText: "Please, type a city name or description",
 };
@@ -12,7 +13,7 @@ const HELPER_TEXTS = {
 function SearchBar() {
   const [searchText, setSearchText] = useState("");
   const [helperText, setHelperText] = useState(" ");
-  const { data, handleCityData, loading } = useCityData();
+  const { handleCityData, loading } = useCityData();
 
   const handleSearchChange = (ev: ChangeEvent<HTMLInputElement>) =>
     setSearchText(ev.target.value);
@@ -32,7 +33,7 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <div role="search">
       <div className="relative min-w-96">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg
@@ -42,6 +43,7 @@ function SearchBar() {
             fill="none"
             viewBox="0 0 20 20"
           >
+            <title>Search</title>
             <path
               stroke="currentColor"
               strokeLinecap="round"
