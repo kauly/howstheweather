@@ -2,4 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
- 
+ @layer components {
+    .container-bg {
+        @apply rounded-lg shadow-lg bg-zinc-500/10 border border-zinc-400 
+    }
+ }

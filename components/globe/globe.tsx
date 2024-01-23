@@ -6,6 +6,7 @@ import { feature } from "topojson-client";
 
 import world from "./world.json";
 
+// @ts-expect-error old library
 const geometries = feature(world, world.objects.countries);
 const initialCoords: [number, number] = [14.235, 51.9253];
 

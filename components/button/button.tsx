@@ -9,7 +9,7 @@ type ButtonProps = {
 function Button({ children, loading = false, ...props }: ButtonProps) {
   return (
     <button
-      className=" relative text-zinc-800 flex items-center  justify-center bg-gradient-to-r from-orange-400 to-orange-500  hover:from-orange-400 hover:to-orange-300 disabled:hover:bg-orange-400 font-medium rounded-lg text-sm px-4 py-2"
+      className="relative text-zinc-800 flex items-center justify-center bg-gradient-to-r from-orange-400 to-orange-500  hover:from-orange-400 hover:to-orange-300 disabled:hover:bg-orange-400 font-medium rounded-lg text-sm px-4 py-2"
       disabled={loading}
       {...props}
     >

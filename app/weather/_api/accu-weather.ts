@@ -7,6 +7,8 @@ import {
 const API_ENDPOINT = process.env.ACCUWEATHER_API_ENDPOINT;
 const API_KEY = process.env.ACCUWEATHER_API_KEY;
 
+const imperialToMetric = (far: number): number => Math.round((far - 32) * 0.5);
+
 async function getLocationKey(
   cityName: string
 ): Promise<{ localKey: string; cityName: string }> {
@@ -41,7 +43,6 @@ async function getLocationKey(
 }
 
 async function getCurrentWeather(locationKey: string) {
-  console.log("🚀 ~ getCurrentWeather ~ locationKey:", locationKey);
   try {
     if (!API_KEY) {
       throw new Error("No API_KEY was founded");
@@ -107,8 +108,14 @@ async function getWeatherForecast(locationKey: string) {
       headline: data.Headline.Text,
       forecasts: data.DailyForecasts.map((forecast) => ({
         date: forecast.Date,
-        minimum: forecast.Temperature.Minimum.Value,
-        maximum: forecast.Temperature.Maximum.Value,
+        minimum: {
+          imperial: forecast.Temperature.Minimum.Value,
+          metric: imperialToMetric(forecast.Temperature.Minimum.Value),
+        },
+        maximum: {
+          imperial: forecast.Temperature.Maximum.Value,
+          metric: imperialToMetric(forecast.Temperature.Maximum.Value),
+        },
         description: forecast.Day.IconPhrase,
       })),
     };
@@ -119,19 +126,13 @@ async function getWeatherForecast(locationKey: string) {
 }
 
 async function getWeatherData(city: string) {
-  console.debug("Ai - Chain Response: ", city);
   try {
     if (!city || city === "not found") {
       throw new Error("City not found");
     }
     const locationData = await getLocationKey(city);
-    console.debug("Ai - Location Key Response: ", locationData);
-
     const currentData = await getCurrentWeather(locationData.localKey);
-    console.debug("Ai - Current Weather Response: ", currentData);
-
     const forecastData = await getWeatherForecast(locationData.localKey);
-    console.debug("Ai - Forecast Response: ", forecastData);
 
     return {
       currentData: {

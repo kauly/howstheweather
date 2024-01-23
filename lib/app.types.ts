@@ -7,8 +7,8 @@ import {
 
 export type ForecastItem = {
   date: string;
-  minimum: number;
-  maximum: number;
+  minimum: { imperial: number; metric: number };
+  maximum: { imperial: number; metric: number };
   description: string;
 };
 export type WeatherFinalData = {
@@ -30,7 +30,9 @@ export type WeatherFinalData = {
 export type CityContext = {
   loading: boolean;
   data?: WeatherFinalData;
+  selectedUnit: TempUnits;
   handleCityData: (city: string) => Promise<void>;
+  handleUnitChange: (newValue: TempUnits) => void;
 };
 export interface FiveDaysForecastResponse {
   Headline: Headline;
@@ -38,3 +40,6 @@ export interface FiveDaysForecastResponse {
 }
 export type LocationKeyResponse = LocationKey[];
 export type CurrentWeatherResponse = CurrentWeather[];
+
+export type ToggleItem = { label: string; value: TempUnits };
+export type TempUnits = "imperial" | "metric";

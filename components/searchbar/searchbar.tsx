@@ -3,7 +3,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import { Button } from "@/components/button/button";
-import { useCityData } from "@/hooks/user-city-data";
+import { useCityContext } from "@/hooks/user-city-context";
 
 export const HELPER_TEXTS = {
   loading: "This could take sometime...",
@@ -17,7 +17,7 @@ type SearchBarProps = {
 function SearchBar({ cityName = "" }: SearchBarProps) {
   const [searchText, setSearchText] = useState(cityName);
   const [helperText, setHelperText] = useState(" ");
-  const { handleCityData, loading } = useCityData();
+  const { handleCityData, loading } = useCityContext();
 
   const handleSearchChange = (ev: ChangeEvent<HTMLInputElement>) =>
     setSearchText(ev.target.value);
@@ -61,7 +61,7 @@ function SearchBar({ cityName = "" }: SearchBarProps) {
           <input
             type="search"
             id="default-search"
-            className="block w-full p-4 ps-10 text-sm text-zinc-100 border border-zinc-400 rounded-lg bg-zinc-500/10 focus:outline-none focus:ring focus:ring-orange-400 hover:border-orange-400"
+            className="block w-full p-4 ps-10 text-sm text-zinc-100 border container-bg focus:outline-none focus:ring focus:ring-orange-400 hover:border-orange-400"
             placeholder="Ex: floripa, city of angels, ..."
             onChange={handleSearchChange}
             value={searchText}

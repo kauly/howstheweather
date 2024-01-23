@@ -1,18 +1,26 @@
 "use client";
 
-import { CityContext, type WeatherFinalData } from "@/lib/app.types";
-import { getCityData } from "@/lib/fetchers";
 import { PropsWithChildren, createContext, useCallback, useState } from "react";
 import toast from "react-hot-toast";
+
+import { getCityData } from "@/lib/fetchers";
+
+import {
+  CityContext,
+  type TempUnits,
+  type WeatherFinalData,
+} from "@/lib/app.types";
 
 const CityContext = createContext({
   loading: false,
   data: null,
+  selectedUnit: "imperial",
 } as unknown as CityContext);
 
 function CityProvider({ children }: PropsWithChildren) {
   const [loading, setLoading] = useState(false);
   const [cityData, setCityData] = useState<WeatherFinalData>();
+  const [selectedUnit, setSelectedUnit] = useState<TempUnits>("imperial");
 
   const handleCityData = useCallback(async (city: string) => {
     try {
@@ -26,8 +34,21 @@ function CityProvider({ children }: PropsWithChildren) {
     }
   }, []);
 
+  const handleUnitChange = useCallback(
+    (newValue: TempUnits) => setSelectedUnit(newValue),
+    []
+  );
+
   return (
-    <CityContext.Provider value={{ loading, data: cityData, handleCityData }}>
+    <CityContext.Provider
+      value={{
+        loading,
+        data: cityData,
+        selectedUnit,
+        handleCityData,
+        handleUnitChange,
+      }}
+    >
       {children}
     </CityContext.Provider>
   );
