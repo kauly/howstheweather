@@ -1,16 +1,13 @@
-import { CityData } from "./app.types";
+import { WeatherFinalData } from "./app.types";
 
-async function getCityData(city: string): Promise<{ data: CityData }> {
+async function getCityData(city: string): Promise<{ data: WeatherFinalData }> {
   const res = await fetch("/weather", {
     method: "POST",
     body: JSON.stringify({ city }),
   });
 
   if (!res.ok) {
-    const error = new Error("An error occurred while fetching the data.");
-    error.status = res.status;
-    error.info = await res.json();
-    throw error;
+    throw new Error("An error occurred while fetching the data.");
   }
 
   return res.json();
