@@ -1,5 +1,9 @@
 # How's the weather?
 
+## Demo
+
+https://howstheweather-delta.vercel.app/
+
 ## Introduction
 
 Application to fetch weather using the [AccuWeather API](https://developer.accuweather.com/apis) and [Gemini](https://ai.google.dev/). To spice things up, I'm using Langchain and Google Gemini to reason about the user input. I create a little chain where the user inputs a city, or anything else, and the LLM will try to guess the intended city. With the correct name, the next step is to call the Location API to get the AccuWeather city ID and with that make the API calls for current and forecast weather data. The following images illustrate the data acquisition process, also, take a look at this [AccuWeather API diagram](https://developer.accuweather.com/api-flow-diagram).
