@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# How's the weather?
 
-## Getting Started
+## Introduction
 
-First, run the development server:
+Application to fetch weather using the [AccuWeather API](https://developer.accuweather.com/apis) and [Gemini](https://ai.google.dev/). To spice things up, I'm using Langchain and Google Gemini to reason about the user input. I create a little chain where the user inputs a city, or anything else, and the LLM will try to guess the intended city. With the correct name, the next step is to call the Location API to get the AccuWeather city ID and with that make the API calls for current and forecast weather data. The following images illustrate the data acquisition process, also, take a look at this [AccuWeather API diagram](https://developer.accuweather.com/api-flow-diagram).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+![API Diagram](/docs/api-call.png "API Call")
+
+## Features
+
+- Tests
+- Error handling
+- Loading indicators
+- Weather Data
+  - Current temperature
+  - Weather description
+  - Humidity
+  - Wind speed
+  - Five days forecast
+- Toggle between Celsius and Fahrenheit
+
+## Running
+
+It's necessary to get two API keys to run this app locally, Google Gemini and AccuWeather. A Gemini key it's easy and free to use and can be found at https://ai.google.dev. The AccuWeather has a pretty low free tier of 50 request peer day but it's a simple and useful API. An AccuWeather API can be create at https://developer.accuweather.com/packages. With the two API keys create a `.env.local` following the `.env.example`. After that just install the dependencies and run the project.
+
 ```
+# Create an env file
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+cat .env.example > .env.local
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Install the dependencies
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+pnpm i
 
-## Learn More
+# Run the project
 
-To learn more about Next.js, take a look at the following resources:
+pnpm dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Run the tests
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+pnpm test
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```

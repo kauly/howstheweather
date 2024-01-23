@@ -38,7 +38,7 @@ function Globe() {
     return () => plot.remove();
   }, []);
 
-  return <div ref={containerRef} />;
+  return <div ref={containerRef} className="min-h-80" />;
 }
 
 export { Globe };
